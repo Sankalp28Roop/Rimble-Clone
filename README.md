@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rimble Clone
+
+<img src="/preview.svg" alt="Rimble Clone Preview" width="100%">
+
+Immersive 3D-scrolling landing page built with **Next.js**, **React Three Fiber**, **Framer Motion**, and **Tailwind CSS**.
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| 3D Engine | React Three Fiber + Drei |
+| Post-processing | `@react-three/postprocessing` (Bloom + Vignette) |
+| Scroll Animation | Framer Motion `useScroll` / `useTransform` |
+| Styling | Tailwind CSS v4 |
+
+## Features
+
+- **Scroll-Driven 3D Camera** — Smooth plunge above/below a custom water surface, synced to page scroll
+- **Custom Water Shader** — Double-sided GLSL with Fresnel, shimmer, and color interpolation (teal above → deep navy below)
+- **3D Lotus** — Loaded from `lotus.glb` with emissive material overrides; falls back to procedural geometry if the model is absent
+- **Mouse Parallax** — Lotus subtly tracks cursor with lerp-based easing in `useFrame`
+- **Bloom Effects** — Cinematic glow on emissive surfaces via `@react-three/postprocessing`
+- **Dynamic Typography** — "BUILT WITH RIMBLE.APP" crossfades to "SINCE 2026" on scroll
+- **Glassmorphism Card** — Fixed-bottom UI with backdrop blur, testimonial carousel, magnetic "Build" button
+- **Particle Systems** — Floating glow particles around the lotus + atmospheric ambient particles
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) and scroll.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Optional: 3D Model
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Place a `lotus.glb` file in `public/` to replace the procedural fallback. A generator script is also available:
 
-## Learn More
+```bash
+node scripts/generate-lotus.mjs
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/             # Next.js App Router (layout, page)
+├── components/
+│   ├── 3d/          # R3F scene: Water, Lotus, Particles, Camera, Effects
+│   └── ui/          # DOM overlays: GlassCard, PixelatedText, MagneticButton
+├── hooks/           # useMousePosition, useScrollProgress
+├── shaders/         # Custom GLSL (water vertex/fragment)
+scripts/             # GLB generation utility
+```
