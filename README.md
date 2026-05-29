@@ -1,6 +1,8 @@
 # Rimble Clone
 
-<img src="/preview.svg" alt="Rimble Clone Preview" width="100%">
+<img width="1918" height="1025" alt="WebGl" src="https://github.com/user-attachments/assets/1cf2dbb8-03dd-4ac9-acb8-aef77cf873df" />
+<img width="1920" height="1025" alt="dashbaord " src="https://github.com/user-attachments/assets/82186e9d-ace7-4442-9743-eb024463f5a8" />
+
 
 Immersive 3D-scrolling landing page built with **Next.js**, **React Three Fiber**, **Framer Motion**, and **Tailwind CSS**.
 
